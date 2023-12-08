@@ -140,7 +140,9 @@ def run_convert(args):
         logging.info("Create labels_id")
         annotations["category_id"] = annotations["labels"].progress_apply(lambda x: [labels[label] for label in x])
         annotations["label_path"] = annotations["image_path"].progress_apply(
-            lambda x: x.replace(phase, f"{phase}_labels").replace(".jpg", ".txt")
+            lambda x: x.replace(".jpg", ".txt")
+            # No need to save .txt to another folder, and it has bugs that if path has same phase
+            #lambda x: x.replace(phase, f"{phase}_labels").replace(".jpg", ".txt")
         )
         logging.info("Convert")
         for target in annotations["target"].unique():
@@ -160,6 +162,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Convert Hagrid annotations to Yolo annotations format", add_help=False)
     parser.add_argument("--bbox_format", default="cxcywh", type=str, help="bbox format: xyxy, cxcywh, xywh")
     parser.add_argument("--cfg", default="converter_config.yaml", type=str, help="path to data config")
-    parser.add_argument("--out", default="./hagrid_yolo_format", type=str, help="path to output dir")
+    parser.add_argument("--out", default="./hagrid_yolo_format_1207", type=str, help="path to output dir")
     args = parser.parse_args()
     run_convert(args)

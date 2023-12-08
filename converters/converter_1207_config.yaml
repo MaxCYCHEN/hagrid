@@ -4,21 +4,13 @@ dataset:
   phases: [train, test, val] #names of annotation directories
   targets:
     - call
-    - dislike
     - fist
-    - four
     - like
     - mute
     - ok
     - one
     - palm
     - peace
-    - rock
     - stop
-    - stop_inverted
     - three
-    - two_up
-    - two_up_inverted
-    - three2
-    - peace_inverted
     - no_gesture
